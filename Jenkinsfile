@@ -3,6 +3,8 @@ pipeline {
 
     environment {
         // Define any environment variables you need here
+        // For example, if you want to define a Java home variable:
+        JAVA_HOME = '/path/to/java'
     }
 
     stages {
@@ -10,7 +12,8 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Checkout the code from Git repository
-                git 'https://github.com/codemaster170/LayoutCard.git'
+                git branch: 'main', url: 'https://github.com/codemaster170/LayoutCard.git'
+                // Ensure you're using the correct branch name here
             }
         }
 
@@ -59,7 +62,10 @@ pipeline {
             echo 'Build or tests failed.'
         }
         always {
-            // Clean up or other tasks that need to run after the pipeline, regardless of success/failure
+            // Actions that always run after the pipeline, regardless of success/failure
+            echo 'Cleaning up or running post-build tasks.'
+            // Add any clean-up steps here, like removing temporary files or notifying users
         }
     }
 }
+
